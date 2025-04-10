@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kayfe - E-posta Doğrulandı</title>
+    <title>Kayfe - Email Verified</title>
     <style>
         body {
             font-family: 'Helvetica', Arial, sans-serif;
             background: linear-gradient(135deg, #2c1338 0%, #1a0f24 100%);
-            margin: 0;æ
+            margin: 0;
             padding: 0;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .language-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
         .container {
             background: rgba(255, 255, 255, 0.1);
@@ -42,23 +60,6 @@
             line-height: 1.6;
             margin-bottom: 30px;
         }
-        .button {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: #9E2EBE;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: #8026A0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(158, 46, 190, 0.3);
-        }
         .checkmark {
             width: 80px;
             height: 80px;
@@ -81,6 +82,10 @@
     </style>
 </head>
 <body>
+    <div class="language-toggle" onclick="toggleLanguage()">
+        English
+    </div>
+
     <div class="container">
         <img src="https://jxkosolsadhddluhhicu.supabase.co/storage/v1/object/public/fortuneimages//iconbg1.png" alt="Kayfe Logo" class="logo">
         <div class="checkmark">
@@ -88,9 +93,23 @@
                 <path d="M20 6L9 17l-5-5"/>
             </svg>
         </div>
-        <h1>E-posta Adresiniz Doğrulandı!</h1>
-        <p>Kayfe'ye hoş geldiniz! Hesabınız başarıyla aktifleştirildi. Şimdi fal dünyasına adım atabilirsiniz.</p>
-        <a href="https://josephoget.github.io/kayfe_privacy_policy/" class="button">Devam Et</a>
+        <h1 id="title">Your Email Has Been Verified!</h1>
+        <p id="message">Welcome to Kayfe! Your account has been successfully activated. You can now continue to the app.</p>
     </div>
+
+    <script>
+        let isEnglish = true;
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            document.querySelector('.language-toggle').textContent = isEnglish ? "English" : "Türkçe";
+            document.getElementById('title').textContent = isEnglish
+                ? "Your Email Has Been Verified!"
+                : "E-posta Adresiniz Doğrulandı!";
+            document.getElementById('message').textContent = isEnglish
+                ? "Welcome to Kayfe! Your account has been successfully activated. You can now continue to the app."
+                : "Kayfe'ye hoş geldiniz! Hesabınız başarıyla aktifleştirildi. Artık uygulamayı kullanmaya başlayabilirsiniz.";
+        }
+    </script>
 </body>
 </html>
